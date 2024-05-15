@@ -60,73 +60,70 @@ class _RangeTableState extends State<RangeTable> {
     return BlocBuilder<RangeTableCubit, int>(
       bloc: widget.rangeTableCubit,
       builder: (context, selectedIndex) {
-        return InteractiveViewer(
-          minScale: 1,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 13),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return DragTarget<int>(onMove: (event) {
-                final currentState = isSelect;
-                if (currentState != null) {
-                  widget.ranges[selectedIndex].range[index] = currentState;
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 13),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return DragTarget<int>(onMove: (event) {
+              final currentState = isSelect;
+              if (currentState != null) {
+                widget.ranges[selectedIndex].range[index] = currentState;
+              }
+            }, builder: (context, _, __) {
+              Color? currentColor = theme.colorScheme.background;
+              for (var positionRange in widget.ranges.reversed) {
+                if (positionRange.range[index]) {
+                  currentColor = positionRange.paintColor;
+                  break;
                 }
-              }, builder: (context, _, __) {
-                Color currentColor = theme.colorScheme.background;
-                for (var positionRange in widget.ranges.reversed) {
-                  if (positionRange.range[index]) {
-                    currentColor = positionRange.paintColor;
-                    break;
-                  }
-                }
-                return LongPressDraggable<int>(
-                  maxSimultaneousDrags: 1,
-                  data: 1,
-                  feedback: const SizedBox(),
+              }
+              return Draggable<int>(
+                maxSimultaneousDrags: 1,
+                data: 1,
+                feedback: const SizedBox(),
+                child: GestureDetector(
+                  onTapDown: (_) {
+                    if (widget.ranges[selectedIndex].range[index]) {
+                      isSelect = false;
+                    } else {
+                      isSelect = true;
+                    }
+                  },
+                  onTapUp: (_) {
+                    isSelect = null;
+                  },
                   child: GestureDetector(
-                    onTapDown: (_) {
-                      if (widget.ranges[selectedIndex].range[index]) {
-                        isSelect = false;
-                      } else {
-                        isSelect = true;
+                    onTap: () {
+                      if (mounted) {
+                        setState(() {
+                          widget.ranges[selectedIndex].range[index] =
+                              !widget.ranges[selectedIndex].range[index];
+                        });
                       }
                     },
-                    onTapUp: (_) {
-                      isSelect = null;
-                    },
-                    child: GestureDetector(
-                      onTap: () {
-                        if (mounted) {
-                          setState(() {
-                            widget.ranges[selectedIndex].range[index] =
-                                !widget.ranges[selectedIndex].range[index];
-                          });
-                        }
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          color: currentColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            mStringList[index],
-                            style: const TextStyle(
-                              fontSize: 13,
-                            ),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        color: currentColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          mStringList[index],
+                          style: const TextStyle(
+                            fontSize: 13,
                           ),
                         ),
                       ),
                     ),
                   ),
-                );
-              });
-            },
-            itemCount: mStringList.length,
-          ),
+                ),
+              );
+            });
+          },
+          itemCount: mStringList.length,
         );
       },
     );

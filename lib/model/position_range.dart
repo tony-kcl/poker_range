@@ -14,7 +14,7 @@ class PositionRange {
   /// 固定為 169 個
   final List<bool> range;
 
-  final Color paintColor;
+  final Color? paintColor;
 }
 
 // class UTGRange extends PositionRange {
