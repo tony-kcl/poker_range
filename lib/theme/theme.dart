@@ -6,6 +6,7 @@ class BaseTheme {
 
   static ThemeData createThemeData() {
     return ThemeData(
+      brightness: Brightness.dark,
       textTheme: TextTheme(
         displayLarge: BaseTextTheme.h1,
         displayMedium: BaseTextTheme.h2,

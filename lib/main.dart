@@ -9,6 +9,7 @@ import 'package:poker_range/model/position.dart';
 import 'package:poker_range/model/position_range.dart';
 import 'package:poker_range/model/ten_people_range_table.dart';
 import 'package:poker_range/page/set_range_page/set_range_page.dart';
+import 'package:poker_range/route/routes.dart';
 import 'package:poker_range/theme/theme_cubit.dart';
 import 'package:poker_range/widget/range_table/range_table.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,33 +48,39 @@ class App extends StatelessWidget {
           create: (_) => ThemeCubit(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // localizationsDelegates: [
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        //   LocalJsonLocalization.delegate
-        // ],
-        home: Scaffold(
-          body: SafeArea(
-            child: SetRangePage(data: PeopleRangeTable(
-              peopleCount: 10,
-              ranges: [
-                PositionRange(
-                  position: Position.BB,
-                  range: c,
-                  paintColor: Colors.blue,
-                ),
-                PositionRange(
-                  position: Position.SB,
-                  range: d,
-                  paintColor: Colors.red,
-                ),
-              ],
-            )),
-          ),
-        ),
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, theme) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            // localizationsDelegates: [
+            //   GlobalMaterialLocalizations.delegate,
+            //   GlobalWidgetsLocalizations.delegate,
+            //   GlobalCupertinoLocalizations.delegate,
+            //   LocalJsonLocalization.delegate
+            // ],
+            routerConfig: Routes.router,
+            // home: Scaffold(
+            //   body: SafeArea(
+            //     child: SetRangePage(data: PeopleRangeTable(
+            //       peopleCount: 10,
+            //       ranges: [
+            //         PositionRange(
+            //           position: Position.BB,
+            //           range: c,
+            //           paintColor: Colors.blue,
+            //         ),
+            //         PositionRange(
+            //           position: Position.SB,
+            //           range: d,
+            //           paintColor: Colors.red,
+            //         ),
+            //       ],
+            //     )),
+            //   ),
+            // ),
+          );
+        },
       ),
     );
   }
