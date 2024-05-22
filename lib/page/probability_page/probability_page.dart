@@ -21,7 +21,9 @@ class ProbabilityPage extends StatelessWidget {
             scrolledUnderElevation: 0,
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<ProbabilityBloc>().add(ProbabilityToggleModifyEvent(!state.isModifying));
+                },
                 child: Text(
                   '編輯',
                   style: theme.textTheme.titleLarge,
@@ -59,10 +61,35 @@ class ProbabilityPage extends StatelessWidget {
                     child: ReorderableListView.builder(
                       itemBuilder: (context, index) {
                         final record = state.records[index];
-                        return ProbabilityListTile(
+                        return Container(
                           key: Key('$index'),
-                          title: record.title,
-                          winRate: record.winRate,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              AnimatedContainer(
+                                duration: state.isModifying ? const Duration(milliseconds: 500) : Duration.zero,
+                                width: state.isModifying ? 24 : 0,
+                                height: 24,
+                                child: state.isModifying ? IconButton(
+                                  onPressed: () {
+                                    
+                                  }, 
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: theme.colorScheme.error,
+                                    size: 24,
+                                  ),
+                                ) : const SizedBox(),
+                              ),
+                              Expanded(
+                                child: ProbabilityListTile(                                
+                                  title: record.title,
+                                  winRate: record.winRate,
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                       itemCount: state.records.length,

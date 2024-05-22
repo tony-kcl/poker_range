@@ -41,3 +41,13 @@ class ProbabilityAddRecordEvent extends ProbabilityEvent {
   @override
   List<Object?> get props => [ record ];
 }
+
+class ProbabilityToggleModifyEvent extends ProbabilityEvent {
+  ProbabilityToggleModifyEvent(this.toggle);
+
+  final bool toggle;
+
+  @override
+  List<Object?> get props => [ toggle ];
+}
+

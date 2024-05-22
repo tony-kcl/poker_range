@@ -13,6 +13,7 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
     on<ProbabilitySetupRecordsEvent>(_setupRecords);
     on<ProbabilitySwapIndexEvent>(_swapIndex);
     on<ProbabilityAddRecordEvent>(_addRecord);
+    on<ProbabilityToggleModifyEvent>(_toggleModify);
   }
 
   void _setupRecords(ProbabilitySetupRecordsEvent event, Emitter<ProbabilityState> emit) {
@@ -36,5 +37,9 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
   void _addRecord(ProbabilityAddRecordEvent event, Emitter<ProbabilityState> emit) {
     final newRecords = [event.record, ...state.records];
     emit(state.copyWith(records: newRecords));
+  }
+
+  void _toggleModify(ProbabilityToggleModifyEvent event, Emitter<ProbabilityState> emit) {
+    emit(state.copyWith(isModifying: event.toggle));
   }
 }
