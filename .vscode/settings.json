@@ -2,7 +2,9 @@
     "cSpell.words": [
         "prefs",
         "cupertino",
-        "unfocus"
+        "unfocus",
+        "Reorderable",
+        "Fluttertoast"
     ],
     "dart.flutterSdkPath": ".fvm/flutter_sdk",
     // Remove .fvm files from search

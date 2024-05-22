@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:poker_range/helper/winRate/win_rate_calculator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poker_range/model/probability_record.dart';
+import 'package:poker_range/page/probability_page/bloc/probability_bloc.dart';
+import 'package:poker_range/page/probability_page/widget/add_record_dialog.dart';
 
 import 'widget/probability_list_tile.dart';
 
@@ -9,61 +13,89 @@ class ProbabilityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          TextButton(
-            onPressed: () {}, 
-            child: Text(
-              '編輯',
-              style: theme.textTheme.titleLarge,
-            ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    ProbabilityListTile(
-                      title: '買花',
-                      winRate: WinRateCalculator.calculateByOuts(9),
-                    ),
-                    ProbabilityListTile(
-                      title: '買兩頭順',
-                      winRate: WinRateCalculator.calculateByOuts(8),
-                    ),
-                    ProbabilityListTile(
-                      title: '5 Outs',
-                      winRate: WinRateCalculator.calculateByOuts(5),
-                    ),
-                    ProbabilityListTile(
-                      title: '4 Outs',
-                      winRate: WinRateCalculator.calculateByOuts(4),
-                    ),
-                    ProbabilityListTile(
-                      title: '3 Outs',
-                      winRate: WinRateCalculator.calculateByOuts(3),
-                    ),
-                    ProbabilityListTile(
-                      title: '2 Outs',
-                      winRate: WinRateCalculator.calculateByOuts(2),
-                    ),
-                    ProbabilityListTile(
-                      title: '1 Out',
-                      winRate: WinRateCalculator.calculateByOuts(1),
-                    ),
-                  ],
+    return BlocBuilder<ProbabilityBloc, ProbabilityState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  '編輯',
+                  style: theme.textTheme.titleLarge,
                 ),
               ),
             ],
           ),
-        ),
-      ),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Pot: ',
+                        style: theme.textTheme.headlineMedium,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          style: theme.textTheme.headlineMedium,
+                          onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                          onChanged: (value) {
+                            context.read<ProbabilityBloc>().add(ProbabilitySetPotEvent(double.tryParse(value)));
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Expanded(
+                    child: ReorderableListView.builder(
+                      itemBuilder: (context, index) {
+                        final record = state.records[index];
+                        return ProbabilityListTile(
+                          key: Key('$index'),
+                          title: record.title,
+                          winRate: record.winRate,
+                        );
+                      },
+                      itemCount: state.records.length,
+                      onReorder: (oldIndex, newIndex) => {
+                        context.read<ProbabilityBloc>().add(ProbabilitySwapIndexEvent(oldIndex: oldIndex, newIndex: newIndex))
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(
+              Icons.add,
+              size: 32,
+            ),
+            onPressed: () {
+              showCupertinoDialog<ProbabilityRecord>(
+                context: context,
+                barrierDismissible: true,
+                builder: (context) {
+                  return const AddRecordDialog();
+                }
+              ).then((record) {
+                if (record != null) {
+                  context.read<ProbabilityBloc>().add(ProbabilityAddRecordEvent(record));
+                }
+              });
+            },
+          ),
+        );
+      },
     );
   }
 }

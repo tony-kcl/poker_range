@@ -17,6 +17,7 @@ dependencies:
   intl: ^0.18.1
   localization: ^2.1.1
   shared_preferences: ^2.2.3
+  fluttertoast: ^8.2.5
 
 dev_dependencies:
   flutter_test:
