@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:poker_range/widget/odd_text.dart';
+import 'package:poker_range/model/win_rate.dart';
+import 'package:poker_range/widget/odd_text/odd_text.dart';
 
 class ProbabilityListTile extends StatelessWidget {
   const ProbabilityListTile({
     super.key,
     required this.title,
-    required this.flopProbability,
-    required this.turnProbability,
+    required this.winRate,
   });
 
   final String title;
 
-  final double flopProbability;
+  final WinRate winRate;
 
-  final double turnProbability;
+  static const double spacing = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +30,52 @@ class ProbabilityListTile extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '翻牌: ' + '$flopProbability%',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    const OddText(winRate: 25,),
-                  ],
+                const SizedBox(height: 10,),
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '翻牌到河牌: ' + '${winRate.flopToRiver}%',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ),
+                      OddText(winRate: winRate.flopToRiver,),
+                    ],
+                  ),
                 ),
-                Text(
-                  '轉牌: ' + '$turnProbability%',
-                  style: theme.textTheme.titleLarge,
+                const SizedBox(height: spacing,),
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '翻牌到轉牌: ' + '${winRate.flopToTurn}%',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ),
+                      OddText(winRate: winRate.flopToTurn,),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: spacing,),
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '轉牌到河牌: ' + '${winRate.turnToRiver}%',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ),
+                      OddText(winRate: winRate.turnToRiver,),
+                    ],
+                  ),
                 ),
               ],
             ),

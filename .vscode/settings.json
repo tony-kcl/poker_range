@@ -1,7 +1,8 @@
 {
     "cSpell.words": [
         "prefs",
-        "cupertino"
+        "cupertino",
+        "unfocus"
     ],
     "dart.flutterSdkPath": ".fvm/flutter_sdk",
     // Remove .fvm files from search
