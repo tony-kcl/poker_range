@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poker_range/constant/constant.dart';
+import 'package:poker_range/constant/field.dart';
+import 'package:poker_range/helper/shared_preference/shared_preference_helper.dart';
 import 'package:poker_range/model/probability_record.dart';
 import 'package:poker_range/model/wrapped.dart';
 import 'package:poker_range/service/probability_record_service.dart';
@@ -25,7 +27,14 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
     if (records.isEmpty) {
       _dataService.saveRecords(Constant.defaultRecords);
     }
-    emit(state.copyWith(records: records.isNotEmpty ? records : Constant.defaultRecords));
+    emit(
+      state.copyWith(
+        records: records.isNotEmpty ? records : Constant.defaultRecords,
+        flopToRiver: SharedPreferencesHelper().getString(Field.flopToRiverField),
+        flopToTurn: SharedPreferencesHelper().getString(Field.flopToTurnField),
+        turnToRiver: SharedPreferencesHelper().getString(Field.turnToRiverField),
+      )
+    );
   }
 
   void _setPotSize(ProbabilitySetPotEvent event, Emitter<ProbabilityState> emit) {

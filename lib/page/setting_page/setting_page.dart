@@ -19,29 +19,59 @@ class SettingPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            InkWell(
+            _OptionRow(
+              title: '主題設定',
               onTap: () {
                 context.pushNamed(Routes.themePage);
               },
-              child: SizedBox(
-                height: 48,
-                child: Row(
-                  children: [
-                    const SizedBox(width: 10,),
-                    Text(
-                      '主題設定',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    const Expanded(child: SizedBox()),
-                    const Icon(
-                      Icons.chevron_right,
-                      size: 32,
-                    ),
-                    const SizedBox(width: 10,),
-                  ],
-                ),
-              ),
-            )
+            ),
+            const Divider(
+              indent: 10,
+              endIndent: 20,
+            ),
+            _OptionRow(
+              title: '文字設定',
+              onTap: () {
+                context.pushNamed(Routes.textSettingPage);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OptionRow extends StatelessWidget {
+  const _OptionRow({
+    required this.title,
+    required this.onTap,
+  });
+
+  final String title;
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        height: 48,
+        child: Row(
+          children: [
+            const SizedBox(width: 10,),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge,
+            ),
+            const Expanded(child: SizedBox()),
+            const Icon(
+              Icons.chevron_right,
+              size: 32,
+            ),
+            const SizedBox(width: 10,),
           ],
         ),
       ),

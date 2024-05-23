@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:poker_range/helper/logger/logger.dart';
+import 'package:poker_range/helper/shared_preference/shared_preference_helper.dart';
 import 'package:poker_range/model/position.dart';
 import 'package:poker_range/model/position_range.dart';
 import 'package:poker_range/model/ten_people_range_table.dart';
@@ -24,6 +25,7 @@ void main() {
       Bloc.observer = const AppBlocObserver();
       WidgetsFlutterBinding.ensureInitialized();
       final prefs = await SharedPreferences.getInstance();
+      SharedPreferencesHelper().ensureInitialized(prefs);
       runApp(App(prefs));
     },
     (error, stackTrace) =>

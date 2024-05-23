@@ -21,6 +21,9 @@ class Routes {
   static const String themePage = 'themePage';
   static const String _themeRoute = '/themeRoute';
 
+  static const String textSettingPage = 'textSettingPage';
+  static const String _textSettingRoute = '/textSettingRoute';
+
   static final router = GoRouter(
     initialLocation: _menuRoute,
     routes: [
@@ -45,17 +48,23 @@ class Routes {
         builder: (context, state) => const ThemePage(),
       ),
       GoRoute(
+        path: _textSettingRoute,
+        name: textSettingPage,
+        builder: (context, state) => const TextSettingPage(),
+      ),
+      GoRoute(
         path: _settingRoute,
         name: settingPage,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            child: const SettingPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-              child: child,
-            )
-          );
-        },
+        builder: (context, state) => const SettingPage(),
+        // pageBuilder: (context, state) {
+        //   return CustomTransitionPage(
+        //     child: const SettingPage(),
+        //     transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
+        //       opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+        //       child: child,
+        //     )
+        //   );
+        // },
       ),
     ],
   );

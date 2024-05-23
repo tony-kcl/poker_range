@@ -20,9 +20,8 @@ class ProbabilityListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return BlocSelector<ProbabilityBloc, ProbabilityState, bool>(
-      selector: (state) => state.isModifying,
-      builder: (context, isModifying) {
+    return BlocBuilder<ProbabilityBloc, ProbabilityState>(
+      builder: (context, state) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -46,11 +45,11 @@ class ProbabilityListTile extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '翻牌到河牌: ' + '${winRate.flopToRiver}%',
+                              '${state.flopToRiver ?? '翻牌到河牌'}: ' + '${winRate.flopToRiver}%',
                               style: theme.textTheme.titleLarge,
                             ),
                           ),
-                          if (!isModifying) ... [
+                          if (!state.isModifying) ... [
                             OddText(
                               winRate: winRate.flopToRiver,
                             ),
@@ -67,11 +66,11 @@ class ProbabilityListTile extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '翻牌到轉牌: ' + '${winRate.flopToTurn}%',
+                              '${state.flopToTurn ?? '翻牌到轉牌'}: ' + '${winRate.flopToTurn}%',
                               style: theme.textTheme.titleLarge,
                             ),
                           ),
-                          if (!isModifying) ... [
+                          if (!state.isModifying) ... [
                             OddText(
                               winRate: winRate.flopToTurn,
                             ),
@@ -88,11 +87,11 @@ class ProbabilityListTile extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '轉牌到河牌: ' + '${winRate.turnToRiver}%',
+                              '${state.turnToRiver ?? '轉牌到河牌'}: ' + '${winRate.turnToRiver}%',
                               style: theme.textTheme.titleLarge,
                             ),
                           ),
-                          if (!isModifying) ... [
+                          if (!state.isModifying) ... [
                             OddText(
                               winRate: winRate.turnToRiver,
                             ),
