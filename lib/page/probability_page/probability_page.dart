@@ -25,7 +25,7 @@ class ProbabilityPage extends StatelessWidget {
                   context.read<ProbabilityBloc>().add(ProbabilityToggleModifyEvent(!state.isModifying));
                 },
                 child: Text(
-                  '編輯',
+                  state.isModifying ? '完成' : '編輯',
                   style: theme.textTheme.titleLarge,
                 ),
               ),

@@ -12,6 +12,7 @@ import 'package:poker_range/page/probability_page/bloc/probability_bloc.dart';
 import 'package:poker_range/page/set_range_page/set_range_page.dart';
 import 'package:poker_range/repository/probability/probability_impl.dart';
 import 'package:poker_range/route/routes.dart';
+import 'package:poker_range/theme/theme.dart';
 import 'package:poker_range/theme/theme_cubit.dart';
 import 'package:poker_range/widget/range_table/range_table.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,15 +48,16 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => ThemeCubit(),
+          create: (_) => ThemeCubit(Colors.blue),
         ),
         BlocProvider(create: (_) => ProbabilityBloc(ProbabilitySharedPreferenceImpl(prefs))..add(ProbabilitySetupRecordsEvent()))
       ],
-      child: BlocBuilder<ThemeCubit, ThemeData>(
+      child: BlocBuilder<ThemeCubit, MyThemeData>(
         builder: (context, theme) {
+          print('update theme');
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: theme,
+            theme: theme.themeData,
             // localizationsDelegates: [
             //   GlobalMaterialLocalizations.delegate,
             //   GlobalWidgetsLocalizations.delegate,

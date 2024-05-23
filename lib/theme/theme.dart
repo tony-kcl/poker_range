@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:poker_range/theme/text/text_theme.dart';
 
+class MyThemeData {
+  MyThemeData({
+    required this.themeData,
+    required this.seedColor,
+  });
+
+  final ThemeData themeData;
+  final Color seedColor;
+
+  MyThemeData copyWith({
+    ThemeData? themeData,
+    Color? seedColor,
+  }) {
+    return MyThemeData(
+      seedColor: seedColor ?? this.seedColor,
+      themeData: themeData ?? this.themeData,
+    );
+  }
+}
+
 class BaseTheme {
   BaseTheme._();
 
-  static ThemeData createThemeData() {
+  static ThemeData createThemeData(Color seedColor, {Brightness? brightness}) {
     return ThemeData(
-      brightness: Brightness.dark,
+      colorScheme: ColorScheme.fromSeed(seedColor: seedColor, brightness: brightness ?? Brightness.light),
       textTheme: TextTheme(
         displayLarge: BaseTextTheme.h1,
         displayMedium: BaseTextTheme.h2,

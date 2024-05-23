@@ -9,6 +9,19 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.pushNamed(Routes.settingPage);
+            },
+            icon: const Icon(
+              Icons.settings,
+            ),
+          ),
+          const SizedBox(width: 5,),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
