@@ -3,21 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poker_range/constant/constant.dart';
 import 'package:poker_range/model/probability_record.dart';
 import 'package:poker_range/model/wrapped.dart';
+import 'package:poker_range/service/probability_record_service.dart';
 
 part 'probability_state.dart';
 part 'probability_event.dart';
 
 class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
-  ProbabilityBloc() : super(const ProbabilityState()) {
+  ProbabilityBloc(this._dataService) : super(const ProbabilityState()) {
     on<ProbabilitySetPotEvent>(_setPotSize);
     on<ProbabilitySetupRecordsEvent>(_setupRecords);
     on<ProbabilitySwapIndexEvent>(_swapIndex);
     on<ProbabilityAddRecordEvent>(_addRecord);
     on<ProbabilityToggleModifyEvent>(_toggleModify);
+    on<ProbabilityRemoveRecordEvent>(_removeRecord);
   }
 
+  final ProbabilityRecordService _dataService;
+
   void _setupRecords(ProbabilitySetupRecordsEvent event, Emitter<ProbabilityState> emit) {
-    emit(state.copyWith(records: event.records ?? Constant.defaultRecords));
+    final records = _dataService.loadRecords();
+    if (records.isEmpty) {
+      _dataService.saveRecords(Constant.defaultRecords);
+    }
+    emit(state.copyWith(records: records.isNotEmpty ? records : Constant.defaultRecords));
   }
 
   void _setPotSize(ProbabilitySetPotEvent event, Emitter<ProbabilityState> emit) {
@@ -31,15 +39,24 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
 
     newRecords.removeAt(event.oldIndex);
     newRecords.insert(newIndex, oldItem);
+    _dataService.saveRecords(newRecords);
     emit(state.copyWith(records: newRecords));
   }
 
   void _addRecord(ProbabilityAddRecordEvent event, Emitter<ProbabilityState> emit) {
     final newRecords = [event.record, ...state.records];
+    _dataService.saveRecords(newRecords);
     emit(state.copyWith(records: newRecords));
   }
 
   void _toggleModify(ProbabilityToggleModifyEvent event, Emitter<ProbabilityState> emit) {
     emit(state.copyWith(isModifying: event.toggle));
+  }
+
+  void _removeRecord(ProbabilityRemoveRecordEvent event, Emitter<ProbabilityState> emit) {
+    final newRecords = [...state.records];
+    newRecords.removeAt(event.index);
+    _dataService.saveRecords(newRecords);
+    emit(state.copyWith(records: newRecords));
   }
 }

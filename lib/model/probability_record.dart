@@ -8,4 +8,18 @@ class ProbabilityRecord {
 
   final String title;
   final WinRate winRate;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'winRate': winRate.toJson(),
+    };
+  }
+
+  factory ProbabilityRecord.fromJson(Map<String, dynamic> json) {
+    return ProbabilityRecord(
+      title: json['title'],
+      winRate: WinRate.fromJson(json['winRate']),
+    );
+  }
 }

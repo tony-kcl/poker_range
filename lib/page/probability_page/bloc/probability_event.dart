@@ -12,12 +12,10 @@ class ProbabilitySetPotEvent extends ProbabilityEvent {
 }
 
 class ProbabilitySetupRecordsEvent extends ProbabilityEvent {
-  ProbabilitySetupRecordsEvent({this.records});
-
-  final List<ProbabilityRecord>? records;
+  ProbabilitySetupRecordsEvent();
 
   @override
-  List<Object?> get props => [ records ];
+  List<Object?> get props => [ ];
 }
 
 class ProbabilitySwapIndexEvent extends ProbabilityEvent {
@@ -51,3 +49,11 @@ class ProbabilityToggleModifyEvent extends ProbabilityEvent {
   List<Object?> get props => [ toggle ];
 }
 
+class ProbabilityRemoveRecordEvent extends ProbabilityEvent {
+  ProbabilityRemoveRecordEvent(this.index);
+
+  final int index;
+
+  @override
+  List<Object?> get props => [ index ];
+}

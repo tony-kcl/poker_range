@@ -73,7 +73,7 @@ class ProbabilityPage extends StatelessWidget {
                                 height: 24,
                                 child: state.isModifying ? IconButton(
                                   onPressed: () {
-                                    
+                                    context.read<ProbabilityBloc>().add(ProbabilityRemoveRecordEvent(index));
                                   }, 
                                   icon: Icon(
                                     Icons.delete,

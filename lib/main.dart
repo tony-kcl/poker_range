@@ -10,6 +10,7 @@ import 'package:poker_range/model/position_range.dart';
 import 'package:poker_range/model/ten_people_range_table.dart';
 import 'package:poker_range/page/probability_page/bloc/probability_bloc.dart';
 import 'package:poker_range/page/set_range_page/set_range_page.dart';
+import 'package:poker_range/repository/probability/probability_impl.dart';
 import 'package:poker_range/route/routes.dart';
 import 'package:poker_range/theme/theme_cubit.dart';
 import 'package:poker_range/widget/range_table/range_table.dart';
@@ -48,7 +49,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => ThemeCubit(),
         ),
-        BlocProvider(create: (_) => ProbabilityBloc()..add(ProbabilitySetupRecordsEvent()))
+        BlocProvider(create: (_) => ProbabilityBloc(ProbabilitySharedPreferenceImpl(prefs))..add(ProbabilitySetupRecordsEvent()))
       ],
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, theme) {
