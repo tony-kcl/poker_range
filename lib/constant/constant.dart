@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:poker_range/helper/winRate/win_rate_calculator.dart';
 import 'package:poker_range/model/probability_record.dart';
 
 class Constant {
+  static const Color defaultThemeColor = Colors.blue;
+
   static List<ProbabilityRecord> defaultRecords = [
     ProbabilityRecord(
       title: '買花',

@@ -40,7 +40,6 @@ class ThemePage extends StatelessWidget {
                       _ColorSquare(Colors.pink),
                       _ColorSquare(Colors.green),
                       _ColorSquare(Colors.amber),
-                      _ColorSquare(Colors.white),
                     ],
                   ),
                   const SizedBox(height: 20,),
@@ -56,7 +55,7 @@ class ThemePage extends StatelessWidget {
                         CupertinoSwitch(
                           value: theme.themeData.brightness == Brightness.dark, 
                           onChanged: (val) {
-                            context.read<ThemeCubit>().changeTheme(isBrightness: !val);
+                            context.read<ThemeCubit>().changeTheme(brightness: val ? Brightness.dark : Brightness.light);
                           },
                         ),
                       ],
@@ -81,7 +80,8 @@ class _ColorSquare extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, MyThemeData>(
       builder: (context, theme) {
-        return InkWell(
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
           onTap: () {
             context.read<ThemeCubit>().changeTheme(seedColor: color);
           },
@@ -91,7 +91,7 @@ class _ColorSquare extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: theme.seedColor == color ? Border.all(
+              border: theme.seedColor.value == color.value ? Border.all(
                 width: 2,
                 color: theme.themeData.colorScheme.outline,
               ) : null
