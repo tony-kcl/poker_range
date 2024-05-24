@@ -57,3 +57,18 @@ class ProbabilityRemoveRecordEvent extends ProbabilityEvent {
   @override
   List<Object?> get props => [ index ];
 }
+
+class ProbabilityChangeTextEvent extends ProbabilityEvent {
+  ProbabilityChangeTextEvent({
+    required this.flopToRiver,
+    required this.flopToTurn,
+    required this.turnToRiver,
+  });
+
+  final String flopToRiver;
+  final String flopToTurn;
+  final String turnToRiver;
+
+  @override
+  List<Object?> get props => [ flopToRiver, flopToTurn, turnToRiver ];
+}

@@ -18,6 +18,7 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
     on<ProbabilityAddRecordEvent>(_addRecord);
     on<ProbabilityToggleModifyEvent>(_toggleModify);
     on<ProbabilityRemoveRecordEvent>(_removeRecord);
+    on<ProbabilityChangeTextEvent>(_changeText);
   }
 
   final ProbabilityRecordService _dataService;
@@ -67,5 +68,13 @@ class ProbabilityBloc extends Bloc<ProbabilityEvent, ProbabilityState> {
     newRecords.removeAt(event.index);
     _dataService.saveRecords(newRecords);
     emit(state.copyWith(records: newRecords));
+  }
+
+  void _changeText(ProbabilityChangeTextEvent event, Emitter<ProbabilityState> emit) {
+    emit(state.copyWith(
+      flopToRiver: event.flopToRiver,
+      flopToTurn: event.flopToTurn,
+      turnToRiver: event.turnToRiver,
+    ));
   }
 }

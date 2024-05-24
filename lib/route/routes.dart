@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poker_range/model/ten_people_range_table.dart';
 import 'package:poker_range/page/page.dart';
@@ -23,6 +22,12 @@ class Routes {
 
   static const String textSettingPage = 'textSettingPage';
   static const String _textSettingRoute = '/textSettingRoute';
+
+  static const String rulePage = 'rulePage';
+  static const String _ruleRoute = '/ruleRoute';
+
+  static const String notePage = 'notePage';
+  static const String _noteRoute = '/noteRoute';
 
   static final router = GoRouter(
     initialLocation: _menuRoute,
@@ -51,6 +56,16 @@ class Routes {
         path: _textSettingRoute,
         name: textSettingPage,
         builder: (context, state) => const TextSettingPage(),
+      ),
+      GoRoute(
+        path: _ruleRoute,
+        name: rulePage,
+        builder: (context, state) => const RulePage(),
+      ),
+      GoRoute(
+        path: _noteRoute,
+        name: notePage,
+        builder: (context, state) => const NotePage(),
       ),
       GoRoute(
         path: _settingRoute,

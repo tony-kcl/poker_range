@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poker_range/constant/field.dart';
 import 'package:poker_range/helper/shared_preference/shared_preference_helper.dart';
+import 'package:poker_range/page/probability_page/bloc/probability_bloc.dart';
 
 class TextSettingPage extends StatefulWidget {
   const TextSettingPage({super.key});
@@ -37,6 +39,11 @@ class _TextSettingPageState extends State<TextSettingPage> {
     SharedPreferencesHelper().setString(field: Field.flopToRiverField, value: _flopToRiver.text);
     SharedPreferencesHelper().setString(field: Field.flopToTurnField, value: _flopToTurn.text);
     SharedPreferencesHelper().setString(field: Field.turnToRiverField, value: _turnToRiver.text);
+    context.read<ProbabilityBloc>().add(
+      ProbabilityChangeTextEvent(
+        flopToRiver: _flopToRiver.text, flopToTurn: _flopToTurn.text, turnToRiver: _turnToRiver.text
+      )
+    );
   }
 
   @override
