@@ -5,6 +5,18 @@ import 'package:poker_range/model/probability_record.dart';
 class Constant {
   static const Color defaultThemeColor = Colors.blue;
 
+  static List<String> defaultNoteRecords = [
+    '錦標賽買入後根據抽到卡片的位置入座, 座位從荷官的順時鐘方向為1開始遞增',
+    '面額大的籌碼需放在外面讓別人看得到',
+    '手牌進行時不可與他人討論',
+    '下注時籌碼必須一次性投入, 或是先講數字再投入(不可一點一點的放入)',
+    '放一個籌碼代表跟注(除非有特別說Raise或是All in等字眼)',
+    '錦標賽All in雙方都必須亮牌',
+    '最小加注為大於等於前一個人的加注量,(大盲為1, 前一個人Raise到2, 此時最小加注為 3 => 2 + (2 - 1) = 3,)',
+    '如果河牌亮牌階段對手蓋著棄牌, 則不需秀出手牌即可收池',
+    '不可以越位棄牌, 下注等行為',
+  ];
+
   static List<ProbabilityRecord> defaultRecords = [
     ProbabilityRecord(
       title: '買花',
