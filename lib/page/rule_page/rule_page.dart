@@ -33,64 +33,66 @@ class _RulePageState extends State<RulePage> {
             style: theme.textTheme.headlineMedium,
           ),
         ),
-        body: ListView(
-          children: [
-            PokerTable(
-              cubit: cubit,
-              width: screenSize.width,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _RuleListTile(
-                    title: Text(
-                      '遊戲準備',
-                      style: theme.textTheme.headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    gap: 10,
-                    style: theme.textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                    children: const [
-                      '1. 決定座位',
-                      '2. 從荷官順時鐘方向一人發一張牌, 最大的為Dealer位(上圖的Btn)',
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _RuleListTile(
-                    title: Text(
-                      '遊戲流程',
-                      style: theme.textTheme.headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    gap: 10,
-                    style: theme.textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                    children: const [
-                      '1. 小盲位置放置0.5個BB(大盲), 大盲位置放置1個BB',
-                      '2. 從小盲開始順時鐘發牌一次一張共兩張',
-                      '3. 由UTG(大盲後的順時鐘第一位)開始依次行動(棄牌/加注/跟注)',
-                      '4. 進入翻牌圈, 荷官蓋掉一張牌之後打開3張牌',
-                      '5. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
-                      '6. 進入轉牌, 荷官蓋掉一張牌之後打開1張牌',
-                      '7. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
-                      '8. 進入河牌, 荷官蓋掉一張牌之後打開1張牌',
-                      '9. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
-                      '10. 若河牌沒有人下注則由小盲順時鐘依序開牌比大小, 牌型最大的人收下底池, 若是有人下注則由最後主動下注的人開始順時鐘開牌',
-                      '11. 將Dealer位順時鐘移一位, 開始下一局',
-                    ],
-                  ),
-                ],
+        body: SafeArea(
+          child: ListView(
+            children: [
+              PokerTable(
+                cubit: cubit,
+                width: screenSize.width,
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _RuleListTile(
+                      title: Text(
+                        '遊戲準備',
+                        style: theme.textTheme.headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      gap: 10,
+                      style: theme.textTheme.titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      children: const [
+                        '1. 決定座位',
+                        '2. 從荷官順時鐘方向一人發一張牌, 最大的為Dealer位(上圖的Btn)',
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _RuleListTile(
+                      title: Text(
+                        '遊戲流程',
+                        style: theme.textTheme.headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      gap: 10,
+                      style: theme.textTheme.titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      children: const [
+                        '1. 小盲位置放置0.5個BB(大盲), 大盲位置放置1個BB',
+                        '2. 從小盲開始順時鐘發牌一次一張共兩張',
+                        '3. 由UTG(大盲後的順時鐘第一位)開始依次行動(棄牌/加注/跟注)',
+                        '4. 進入翻牌圈, 荷官蓋掉一張牌之後打開3張牌',
+                        '5. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
+                        '6. 進入轉牌, 荷官蓋掉一張牌之後打開1張牌',
+                        '7. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
+                        '8. 進入河牌, 荷官蓋掉一張牌之後打開1張牌',
+                        '9. 由小盲(若小盲沒有牌,則由小盲之後順時鐘開始第一位有牌的玩家)開始行動(過牌/加注)',
+                        '10. 若河牌沒有人下注則由小盲順時鐘依序開牌比大小, 牌型最大的人收下底池, 若是有人下注則由最後主動下注的人開始順時鐘開牌',
+                        '11. 將Dealer位順時鐘移一位, 開始下一局',
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
