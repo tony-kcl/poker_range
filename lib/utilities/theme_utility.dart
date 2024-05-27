@@ -12,11 +12,7 @@ class ThemeUtility {
   static MyDemoThemeData generateBaselineTheme({
     List<MyCustomColor> customColors = const [],
   }) {
-    final sourceColor = "#6750A4";
-
-    final colorUtilities.TonalPalette x = baselineGetPalette("primary");
-
-    print(x.xToJson());
+    const sourceColor = "#6750A4";
 
     return MyDemoThemeData(
       seed: sourceColor,
