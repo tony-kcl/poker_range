@@ -28,6 +28,10 @@ class _RulePageState extends State<RulePage> {
       child: Scaffold(
         appBar: AppBar(
           scrolledUnderElevation: 0,
+          title: Text(
+            '遊戲規則',
+            style: theme.textTheme.headlineMedium,
+          ),
         ),
         body: ListView(
           children: [

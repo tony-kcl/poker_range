@@ -8,7 +8,7 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final verticalGap = const SizedBox(height: 10,);
+    const verticalGap = SizedBox(height: 10,);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -44,6 +44,16 @@ class MenuPage extends StatelessWidget {
                 },
                 child: Text(
                   '遊戲規則',
+                  style: theme.textTheme.headlineLarge,
+                ),
+              ),
+              verticalGap,
+              TextButton(
+                onPressed: () {
+                  context.pushNamed(Routes.handRankingPage);
+                },
+                child: Text(
+                  '牌型大小',
                   style: theme.textTheme.headlineLarge,
                 ),
               ),

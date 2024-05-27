@@ -29,6 +29,9 @@ class Routes {
   static const String notePage = 'notePage';
   static const String _noteRoute = '/noteRoute';
 
+  static const String handRankingPage = 'handRankingPage';
+  static const String _handRankingRoute = '/handRankingRoute';
+
   static final router = GoRouter(
     initialLocation: _menuRoute,
     routes: [
@@ -66,6 +69,11 @@ class Routes {
         path: _noteRoute,
         name: notePage,
         builder: (context, state) => const NotePage(),
+      ),
+      GoRoute(
+        path: _handRankingRoute,
+        name: handRankingPage,
+        builder: (context, state) => const HandRankingPage(),
       ),
       GoRoute(
         path: _settingRoute,

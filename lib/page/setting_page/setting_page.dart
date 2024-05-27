@@ -13,7 +13,7 @@ class SettingPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           '設定',
-          style: theme.textTheme.titleLarge,
+          style: theme.textTheme.headlineMedium,
         ),
       ),
       body: SafeArea(
