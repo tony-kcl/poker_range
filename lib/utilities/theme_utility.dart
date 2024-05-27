@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poker_range/enums/enums.dart';
-import 'package:poker_range/extensions/extensions.dart';
 import 'package:poker_range/model/models.dart';
 import 'package:poker_range/utils/utils.dart';
-import 'package:material_color_utilities/material_color_utilities.dart' as colorUtilities;
+import 'package:material_color_utilities/material_color_utilities.dart' as color_utilities;
 
 part 'theme_utility_data.dart';
 
@@ -168,7 +167,7 @@ class ThemeUtility {
     );
   }
 
-  static colorUtilities.TonalPalette baselineGetPalette(section) {
+  static color_utilities.TonalPalette baselineGetPalette(section) {
     final prefix = 'md.ref.palette.${section}';
 
     final tokens = _latest_findAllTokens<String>((section, id) => id.startsWith(prefix) ? true : false);
@@ -182,18 +181,18 @@ class ThemeUtility {
     }
 
     int _valueFromMap(int index) {
-      final tone = colorUtilities.TonalPalette.commonTones[index];
+      final tone = color_utilities.TonalPalette.commonTones[index];
       return argbFromHex(group[tone]);
     }
 
-    return colorUtilities.TonalPalette.fromList(List.generate(
-      colorUtilities.TonalPalette.commonSize,
+    return color_utilities.TonalPalette.fromList(List.generate(
+      color_utilities.TonalPalette.commonSize,
       _valueFromMap,
     ));
   }
 
   static List<MyToken<T>> _latest_findAllTokens<T>(Function match) {
-    final tokens = _TOKENS_3P;
+    const tokens = _TOKENS_3P;
     final results = <MyToken<T>>[];
 
     for (final entry in tokens.entries) {
