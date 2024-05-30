@@ -41,6 +41,7 @@ class HandRankingPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(
           '牌型大小',
           style: theme.textTheme.headlineMedium,

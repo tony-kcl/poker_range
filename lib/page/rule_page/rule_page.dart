@@ -22,6 +22,7 @@ class _RulePageState extends State<RulePage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width - MediaQuery.of(context).padding.left - MediaQuery.of(context).padding.right;
     final theme = Theme.of(context);
     return BlocProvider.value(
       value: cubit,
@@ -38,7 +39,7 @@ class _RulePageState extends State<RulePage> {
             children: [
               PokerTable(
                 cubit: cubit,
-                width: screenSize.width,
+                width: screenWidth,
               ),
               const SizedBox(
                 height: 10,

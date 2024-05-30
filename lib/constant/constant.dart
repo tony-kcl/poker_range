@@ -27,6 +27,18 @@ class Constant {
       winRate: WinRateCalculator.calculateByOuts(8),
     ),
     ProbabilityRecord(
+      title: '8 Outs',
+      winRate: WinRateCalculator.calculateByOuts(8),
+    ),
+    ProbabilityRecord(
+      title: '7 Outs',
+      winRate: WinRateCalculator.calculateByOuts(7),
+    ),
+    ProbabilityRecord(
+      title: '6 Outs',
+      winRate: WinRateCalculator.calculateByOuts(6),
+    ),
+    ProbabilityRecord(
       title: '5 Outs',
       winRate: WinRateCalculator.calculateByOuts(5),
     ),
