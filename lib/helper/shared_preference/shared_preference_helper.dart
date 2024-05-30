@@ -10,17 +10,17 @@ class SharedPreferencesHelper {
     return _singleton;
   }
 
-  late SharedPreferences _pref;
+  late SharedPreferences pref;
 
   void ensureInitialized(SharedPreferences pref) {
-    _pref = pref;
+    this.pref = pref;
   }
 
   String? getString(String field) {
-    return _pref.getString(field);
+    return pref.getString(field);
   }
 
   Future<bool> setString({required String field, required String value}) {
-    return _pref.setString(field, value);
+    return pref.setString(field, value);
   }
 }

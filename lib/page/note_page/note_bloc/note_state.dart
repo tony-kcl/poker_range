@@ -24,5 +24,6 @@ class NoteState extends Equatable {
   @override
   List<Object?> get props => [
     isModifying,
+    noteRecords
   ];
 }

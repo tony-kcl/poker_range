@@ -70,7 +70,7 @@ class ProbabilityPage extends StatelessWidget {
                               AnimatedContainer(
                                 duration: state.isModifying ? const Duration(milliseconds: 500) : Duration.zero,
                                 width: state.isModifying ? 24 : 0,
-                                height: 24,
+                                // height: 24,
                                 child: state.isModifying ? IconButton(
                                   onPressed: () {
                                     context.read<ProbabilityBloc>().add(ProbabilityRemoveRecordEvent(index));

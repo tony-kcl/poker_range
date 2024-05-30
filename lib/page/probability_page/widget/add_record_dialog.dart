@@ -15,6 +15,13 @@ class _AddRecordDialogState extends State<AddRecordDialog> {
   final TextEditingController _outsController = TextEditingController();
 
   @override
+  void dispose() {
+    _titleController.dispose();
+    _outsController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return  Dialog(
@@ -98,7 +105,7 @@ class _AddRecordDialogState extends State<AddRecordDialog> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

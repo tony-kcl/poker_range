@@ -10,4 +10,6 @@ class Field {
   static const String flopToTurnField = 'flopToTurnField';
 
   static const String turnToRiverField = 'turnToRiverField';
+
+  static const String noteRecordField = 'noteRecordField';
 }
