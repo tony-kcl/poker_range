@@ -43,6 +43,8 @@ class _OddTextState extends State<OddText> {
               decorationColor: theme.colorScheme.primary,
               color: theme.colorScheme.primary,
             ),
+            softWrap: true,
+            overflow: TextOverflow.visible,
           ),
         );
       },

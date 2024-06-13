@@ -50,8 +50,10 @@ class ProbabilityListTile extends StatelessWidget {
                             ),
                           ),
                           if (!state.isModifying) ... [
-                            OddText(
-                              winRate: winRate.flopToRiver,
+                            Flexible(
+                              child: OddText(
+                                winRate: winRate.flopToRiver,
+                              ),
                             ),
                           ],
                         ],
@@ -71,8 +73,10 @@ class ProbabilityListTile extends StatelessWidget {
                             ),
                           ),
                           if (!state.isModifying) ... [
-                            OddText(
-                              winRate: winRate.flopToTurn,
+                            Flexible(
+                              child: OddText(
+                                winRate: winRate.flopToTurn,
+                              ),
                             ),
                           ],
                         ],
@@ -92,8 +96,10 @@ class ProbabilityListTile extends StatelessWidget {
                             ),
                           ),
                           if (!state.isModifying) ... [
-                            OddText(
-                              winRate: winRate.turnToRiver,
+                            Flexible(
+                              child: OddText(
+                                winRate: winRate.turnToRiver,
+                              ),
                             ),
                           ],
                         ],
