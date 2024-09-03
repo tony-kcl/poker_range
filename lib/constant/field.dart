@@ -12,4 +12,6 @@ class Field {
   static const String turnToRiverField = 'turnToRiverField';
 
   static const String noteRecordField = 'noteRecordField';
+
+  static const String settingRecordField = 'settingRecordField';
 }
