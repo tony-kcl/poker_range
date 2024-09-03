@@ -27,7 +27,7 @@ class SettingPage extends StatelessWidget {
             ),
             const Divider(
               indent: 10,
-              endIndent: 20,
+              endIndent: 10,
             ),
             _OptionRow(
               title: '文字設定',
@@ -35,6 +35,19 @@ class SettingPage extends StatelessWidget {
                 context.pushNamed(Routes.textSettingPage);
               },
             ),
+            const Expanded(child: SizedBox()),
+            _OptionRow(
+              title: '3rd party open source library license',
+              hideArrow: true,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LicensePage(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 20,),
           ],
         ),
       ),
@@ -46,11 +59,14 @@ class _OptionRow extends StatelessWidget {
   const _OptionRow({
     required this.title,
     required this.onTap,
+    this.hideArrow = false,
   });
 
   final String title;
 
   final VoidCallback onTap;
+
+  final bool hideArrow;
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +77,24 @@ class _OptionRow extends StatelessWidget {
         height: 48,
         child: Row(
           children: [
-            const SizedBox(width: 10,),
-            Text(
-              title,
-              style: theme.textTheme.titleLarge,
+            const SizedBox(width: 20,),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleLarge,
+                ),
+              ),
             ),
-            const Expanded(child: SizedBox()),
-            const Icon(
-              Icons.chevron_right,
-              size: 32,
-            ),
-            const SizedBox(width: 10,),
+            if (!hideArrow) ... [
+              const SizedBox(width: 10,),
+              const Icon(
+                Icons.chevron_right,
+                size: 32,
+              ),
+            ],
+            const SizedBox(width: 20,),
           ],
         ),
       ),
